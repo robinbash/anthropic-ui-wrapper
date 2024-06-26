@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { currentConvoId } from "../stores";
+  import { currentConvoId } from "$lib/stores";
 </script>
 
 <div class="sidebar">

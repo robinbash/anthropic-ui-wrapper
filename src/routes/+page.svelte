@@ -1,2 +1,28 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import { Sidebar, Convo } from '$lib/components';
+</script>
+
+<div class="app">
+	<Sidebar />
+	<main>
+		<Convo />
+	</main>
+</div>
+
+<style>
+	:global(body) {
+		background-color: black;
+		margin: 0;
+		color: white;
+	}
+	.app {
+		display: flex;
+		flex-direction: row;
+		height: 100vh;
+		width: 100vw;
+	}
+	main {
+		width: 100%;
+		display: flex;
+	}
+</style>
