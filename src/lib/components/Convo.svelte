@@ -1,10 +1,19 @@
 <script lang="ts">
-	import { currentConvoId } from '$lib/stores';
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
+	// import { convoStore } from '$lib/stores';
+	import { get } from 'svelte/store';
+	import { load } from '$lib/firebase';
+
+	let convoId: string;
+	// const conversation = $convoStore.find((convo) => convo.id === convoId);
 
 	let text = '';
 	let inputEl: HTMLDivElement;
 	let eventSource: EventSource;
+
+	onMount(() => {
+		load();
+	});
 
 	async function submitMessage() {
 		const message = inputEl.innerText;

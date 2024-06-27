@@ -13,19 +13,17 @@ export const POST: RequestHandler = async ({ request }) => {
 			apiKey: ATHROPIC_API_KEY
 		});
 
-		const requestData = await request.json();
+		const data = await request.json();
 
-		if (!requestData) {
+		if (!data) {
 			throw new Error('No request data');
 		}
-
-		const message = requestData.message;
 
 		const stream = new ReadableStream({
 			async start(controller) {
 				client.messages
 					.stream({
-						messages: [{ role: 'user', content: message }],
+						messages: [{ role: 'user', content: data.newMessage }],
 						model: 'claude-3-5-sonnet-20240620',
 						max_tokens: 1024
 					})
