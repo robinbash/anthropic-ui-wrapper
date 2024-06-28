@@ -14,6 +14,7 @@
 		background-color: black;
 		margin: 0;
 		color: white;
+		font-family: Lato, Geneva, Tahoma, sans-serif;
 	}
 	.app {
 		display: flex;

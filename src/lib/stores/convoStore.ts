@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 import type { Conversation } from '$lib/types';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { db } from '$lib/firebase';
 
 const CONVO_COLLECTION = 'conversations';
@@ -10,8 +10,19 @@ function createConvoStore() {
 
 	let unsubscribe: () => void;
 
+	const saveConversation = async (conversation: Conversation): Promise<string | undefined> => {
+		if (!conversation.id) {
+			const { id } = await addDoc(collection(db, CONVO_COLLECTION), {
+				messages: conversation.messages
+			});
+			return id;
+		}
+		updateDoc(doc(db, CONVO_COLLECTION, conversation.id), { messages: conversation.messages });
+	};
+
 	return {
 		subscribe,
+		saveConversation,
 		init: () => {
 			const colRef = collection(db, CONVO_COLLECTION);
 			unsubscribe = onSnapshot(colRef, (snapshot) => {

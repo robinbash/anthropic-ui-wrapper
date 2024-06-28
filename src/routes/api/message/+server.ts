@@ -23,7 +23,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			async start(controller) {
 				client.messages
 					.stream({
-						messages: [{ role: 'user', content: data.newMessage }],
+						messages: data.messages,
 						model: 'claude-3-5-sonnet-20240620',
 						max_tokens: 1024
 					})
