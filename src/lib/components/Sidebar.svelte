@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { convoStore } from '$lib/stores';
 </script>
 
 <div class="sidebar">
@@ -6,7 +7,10 @@
 		<div class="buttondiv">
 			<button on:click={() => {}}>New</button>
 		</div>
-		<div class="convoitem">srjfdklsfskdfjlskdjfasdklasj sdkfj asyf</div>
+		{#each $convoStore as conversation}
+			<a class="convoitem" href={`/conversations/${conversation.id}`}
+				>{conversation.messages[0].content.slice(0, 30)}</a
+			>{/each}
 	</div>
 </div>
 

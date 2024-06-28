@@ -39,27 +39,3 @@ export const db = getFirestore();
 if (dev) {
 	connectFirestoreEmulator(db, 'localhost', 8080);
 }
-
-export const load = async () => {
-	const snapshot = getDocs(collection(db, 'yourCollection'));
-	const data = (await snapshot).docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-
-	console.log(data);
-
-	return {
-		data
-	};
-};
-
-// export const submitReceipt = async (imageBase64: string) => {
-// 	const id = uuid();
-// 	try {
-// 		let submission = {
-// 			imageBase64,
-// 			id
-// 		};
-// 		const {} = await addDoc(collection(db, RECEIPTS_COLLECTION), submission);
-// 	} catch (e) {
-// 		console.error('Error adding document: ', e);
-// 	}
-// };

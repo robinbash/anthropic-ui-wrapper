@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 	import { convoStore } from '$lib/stores';
-	import { load } from '$lib/firebase';
 	import type { Message } from '$lib/types';
 	import SvelteMarkdown from 'svelte-markdown';
 
@@ -10,10 +9,6 @@
 	let inputEl: HTMLDivElement;
 	let generating = false;
 	let eventSource: EventSource;
-
-	onMount(() => {
-		load();
-	});
 
 	async function submitMessage() {
 		const message = inputEl.innerText;
