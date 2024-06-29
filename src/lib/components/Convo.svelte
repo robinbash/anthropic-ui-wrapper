@@ -1,14 +1,23 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import { convoStore } from '$lib/stores';
 	import type { Message } from '$lib/types';
 	import SvelteMarkdown from 'svelte-markdown';
 
-	let convoId: string | undefined;
-	let messages: Message[] = $convoStore.find((convo) => convo.id === convoId)?.messages ?? [];
+	export let convoId: string | undefined = undefined;
+
+	const getMessages = () => {
+		return $convoStore.find((convo) => convo.id === convoId)?.messages ?? [];
+	};
+
+	let messages: Message[] = getMessages();
 	let inputEl: HTMLDivElement;
 	let generating = false;
 	let eventSource: EventSource;
+
+	const unsubscribe = convoStore.subscribe(() => {
+		messages = getMessages();
+	});
 
 	async function submitMessage() {
 		const message = inputEl.innerText;
@@ -57,6 +66,7 @@
 		if (eventSource) {
 			eventSource.close();
 		}
+		unsubscribe();
 	});
 </script>
 

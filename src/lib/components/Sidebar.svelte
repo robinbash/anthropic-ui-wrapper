@@ -5,10 +5,10 @@
 <div class="sidebar">
 	<div class="convolist">
 		<div class="buttondiv">
-			<button on:click={() => {}}>New</button>
+			<a href="/">New</a>
 		</div>
 		{#each $convoStore as conversation}
-			<a class="convoitem" href={`/conversations/${conversation.id}`}
+			<a class="convoitem" href={`${conversation.id}`}
 				>{conversation.messages[0].content.slice(0, 30)}</a
 			>{/each}
 	</div>

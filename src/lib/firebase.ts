@@ -1,18 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
-import {
-	getFirestore,
-	collection,
-	addDoc,
-	getDocs,
-	doc,
-	updateDoc,
-	query,
-	connectFirestoreEmulator,
-	where
-} from 'firebase/firestore';
-
-// import { v4 as uuid } from 'uuid';
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 
 import { dev } from '$app/environment';
 
