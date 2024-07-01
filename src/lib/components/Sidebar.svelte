@@ -41,8 +41,4 @@
 		display: flex;
 		justify-content: center;
 	}
-	button {
-		width: 8rem;
-		height: 2rem;
-	}
 </style>

@@ -3,6 +3,7 @@
 	import { convoStore } from '$lib/stores';
 	import type { Message } from '$lib/types';
 	import SvelteMarkdown from 'svelte-markdown';
+	import { authFetch } from '$lib/fetch';
 
 	export let convoId: string | undefined = undefined;
 
@@ -30,8 +31,7 @@
 			if (eventSource) {
 				eventSource.close();
 			}
-
-			const response = await fetch('/api/message', {
+			const response = await authFetch('/api/message', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

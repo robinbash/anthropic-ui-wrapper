@@ -2,9 +2,12 @@ import { ATHROPIC_API_KEY } from '$env/static/private';
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 import Anthropic from '@anthropic-ai/sdk';
+import { authenticateRequest } from '$lib/server/auth-middleware';
 
 export const POST: RequestHandler = async ({ request }) => {
 	try {
+		await authenticateRequest(request);
+
 		if (!ATHROPIC_API_KEY) {
 			throw new Error('No Anthropic api key');
 		}
