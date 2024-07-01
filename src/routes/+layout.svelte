@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { convoStore } from '$lib/stores';
 	import { Sidebar, Login } from '$lib/components';

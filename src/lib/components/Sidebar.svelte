@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { convoStore } from '$lib/stores';
+	import { Logout } from '$lib/components';
 </script>
 
 <div class="sidebar">
@@ -12,6 +13,7 @@
 				>{conversation.messages[0].content.slice(0, 30)}</a
 			>{/each}
 	</div>
+	<Logout />
 </div>
 
 <style>
