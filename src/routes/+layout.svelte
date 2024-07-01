@@ -1,10 +1,17 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
 	import { convoStore } from '$lib/stores';
-	import { Sidebar } from '$lib/components';
+	import { Sidebar, Login } from '$lib/components';
+	import { auth } from '$lib/firebase';
+	import { user } from '$lib/stores/auth';
+	import { onAuthStateChanged } from 'firebase/auth';
 
 	onMount(() => {
 		convoStore.init();
+		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+			user.set(currentUser);
+		});
+		return unsubscribe;
 	});
 
 	onDestroy(() => {
@@ -13,10 +20,15 @@
 </script>
 
 <div class="app">
-	<Sidebar />
-	<main>
-		<slot />
-	</main>
+	{#if $user}
+		<Sidebar />
+		<main>
+			<slot />
+		</main>
+	{:else}
+		<p>Please log in.</p>
+		<Login />
+	{/if}
 </div>
 
 <style>
