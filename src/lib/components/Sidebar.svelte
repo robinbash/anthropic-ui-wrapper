@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { convoStore } from '$lib/stores';
+	import { convos } from '$lib/stores';
 	import { Logout } from '$lib/components';
 </script>
 
@@ -8,7 +8,7 @@
 		<div class="buttondiv">
 			<a href="/">New</a>
 		</div>
-		{#each $convoStore as conversation}
+		{#each $convos as conversation}
 			<a class="convoitem" href={`${conversation.id}`}
 				>{conversation.messages[0].content.slice(0, 30)}</a
 			>{/each}

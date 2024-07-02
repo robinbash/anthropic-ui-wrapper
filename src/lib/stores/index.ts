@@ -1,2 +1,2 @@
-export * from './convoStore';
+export * from './convos';
 export * from './auth';

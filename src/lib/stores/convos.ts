@@ -43,4 +43,4 @@ function createConvoStore() {
 	};
 }
 
-export const convoStore = createConvoStore();
+export const convos = createConvoStore();

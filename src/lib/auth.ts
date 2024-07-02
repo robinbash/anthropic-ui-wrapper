@@ -1,10 +1,9 @@
 import { auth } from './firebase';
-import { signInWithPopup, signOut, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
-export const login = async () => {
-	const provider = new GoogleAuthProvider();
+export const login = async (email: string, password: string) => {
 	try {
-		await signInWithPopup(auth, provider);
+		await signInWithEmailAndPassword(auth, email, password);
 	} catch (error) {
 		console.error('Error logging in:', error);
 	}

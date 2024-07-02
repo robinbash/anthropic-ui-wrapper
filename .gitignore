@@ -1,5 +1,5 @@
 node_modules
-
+.firebase_emulators
 # Output
 .output
 .vercel

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { convoStore } from '$lib/stores';
+	import { convos } from '$lib/stores';
 	import type { Message } from '$lib/types';
 	import SvelteMarkdown from 'svelte-markdown';
 	import { authFetch } from '$lib/fetch';
@@ -13,7 +13,7 @@
 	let eventSource: EventSource;
 	let messages: Message[];
 
-	$: messages = $convoStore.find((convo) => convo.id === convoId)?.messages ?? [];
+	$: messages = $convos.find((convo) => convo.id === convoId)?.messages ?? [];
 
 	async function submitMessage() {
 		const message = inputEl.innerText;
@@ -44,7 +44,7 @@
 				while (true) {
 					const { done, value } = await reader?.read();
 					if (done) {
-						convoStore.saveConversation({ messages, id: convoId });
+						convos.saveConversation({ messages, id: convoId });
 						break;
 					}
 					const chunk = decoder.decode(value);
