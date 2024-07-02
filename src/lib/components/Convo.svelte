@@ -7,18 +7,13 @@
 
 	export let convoId: string | undefined = undefined;
 
-	const getMessages = () => {
-		return $convoStore.find((convo) => convo.id === convoId)?.messages ?? [];
-	};
-
-	let messages: Message[] = getMessages();
+	// let messages = [];
 	let inputEl: HTMLDivElement;
 	let generating = false;
 	let eventSource: EventSource;
+	let messages: Message[];
 
-	const unsubscribe = convoStore.subscribe(() => {
-		messages = getMessages();
-	});
+	$: messages = $convoStore.find((convo) => convo.id === convoId)?.messages ?? [];
 
 	async function submitMessage() {
 		const message = inputEl.innerText;
@@ -66,7 +61,6 @@
 		if (eventSource) {
 			eventSource.close();
 		}
-		unsubscribe();
 	});
 </script>
 
