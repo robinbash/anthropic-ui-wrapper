@@ -4,6 +4,7 @@
 	import type { Message } from '$lib/types';
 	import SvelteMarkdown from 'svelte-markdown';
 	import { authFetch } from '$lib/fetch';
+	import { user } from '$lib/stores';
 
 	export let convoId: string | undefined = undefined;
 
@@ -17,7 +18,7 @@
 
 	async function submitMessage() {
 		const message = inputEl.innerText;
-		if (!message || generating) return;
+		if (!message || generating || !$user) return;
 		inputEl.innerHTML = '';
 		messages = [...messages, { role: 'user', content: message }];
 		generating = true;
@@ -44,7 +45,7 @@
 				while (true) {
 					const { done, value } = await reader?.read();
 					if (done) {
-						convos.saveConversation({ messages, id: convoId });
+						convos.saveConversation({ messages, id: convoId, userId: $user.uid });
 						break;
 					}
 					const chunk = decoder.decode(value);

@@ -1,21 +1,15 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { convos } from '$lib/stores';
+	import { onMount } from 'svelte';
 	import { Sidebar, Login } from '$lib/components';
 	import { auth } from '$lib/firebase';
 	import { user } from '$lib/stores/auth';
 	import { onAuthStateChanged } from 'firebase/auth';
 
 	onMount(() => {
-		convos.init();
 		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 			user.set(currentUser);
 		});
 		return unsubscribe;
-	});
-
-	onDestroy(() => {
-		convos.destroy();
 	});
 </script>
 

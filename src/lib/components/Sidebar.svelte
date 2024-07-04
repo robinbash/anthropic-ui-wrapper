@@ -1,6 +1,16 @@
 <script lang="ts">
-	import { convos } from '$lib/stores';
+	import { convos, user } from '$lib/stores';
 	import { Logout } from '$lib/components';
+	import { onMount, onDestroy } from 'svelte';
+
+	onMount(() => {
+		if (!$user) return;
+		convos.init($user.uid);
+	});
+
+	onDestroy(() => {
+		convos.destroy();
+	});
 </script>
 
 <div class="sidebar">

@@ -7,5 +7,6 @@ export type Message = {
 
 export type Conversation = {
 	id?: string;
+	userId?: string;
 	messages: Message[];
 };
