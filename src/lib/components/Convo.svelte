@@ -13,8 +13,22 @@
 	let generating = false;
 	let eventSource: EventSource;
 	let messages: Message[];
-
+	let messagesEl: HTMLDivElement;
 	$: messages = $convos.find((convo) => convo.id === convoId)?.messages ?? [];
+
+	let previousLastMessageContent = '';
+	$: lastMessage = messages[messages.length - 1];
+	$: if (lastMessage && lastMessage.content !== previousLastMessageContent) {
+		scrollToBottom();
+		previousLastMessageContent = lastMessage.content;
+	}
+
+	const scrollToBottom = () => {
+		if (!messagesEl) return;
+		setTimeout(() => {
+			messagesEl.scrollTop = messagesEl.scrollHeight;
+		}, 0);
+	};
 
 	async function submitMessage() {
 		const message = inputEl.innerText;
@@ -66,7 +80,7 @@
 </script>
 
 <div class="convo">
-	<div class="messages">
+	<div class="messages" bind:this={messagesEl}>
 		{#each messages as message}
 			{#if message.role === 'user'}
 				<div class="user-message">
@@ -98,22 +112,22 @@
 		@apply w-full flex justify-end;
 	}
 	.user-inner {
-		@apply rounded-full bg-zinc-700 py-2 px-4 text-justify w-5/6 md:w-2/3;
-	}
-	.assistant-message {
-		@apply text-justify;
+		@apply rounded-3xl bg-zinc-700 py-2 px-4  w-5/6 md:w-2/3;
 	}
 	.bottom {
 		@apply flex justify-center items-end gap-2 pb-12 pt-4 px-8;
 	}
 	.input {
-		@apply w-full rounded-full bg-zinc-700 py-2 px-4 max-w-96;
+		@apply w-full rounded-3xl bg-zinc-700 py-2 px-4 max-w-96;
 	}
 	.input:focus {
 		@apply outline-none;
 	}
 	button {
-		@apply rounded-full bg-zinc-700 text-white w-12 h-10 font-bold;
+		@apply rounded-3xl bg-zinc-700 text-white w-12 h-10 font-bold;
+	}
+	:global(code) {
+		@apply bg-zinc-700 px-1;
 	}
 	:global(.assistant-message > *) {
 		all: revert;

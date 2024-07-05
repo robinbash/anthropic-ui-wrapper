@@ -3,7 +3,6 @@
 	import theme from 'svelte-highlight/styles/atom-one-dark';
 
 	export let text = '';
-	console.log(text);
 </script>
 
 <svelte:head>
