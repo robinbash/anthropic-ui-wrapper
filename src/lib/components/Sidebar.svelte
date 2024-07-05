@@ -89,7 +89,7 @@
 		@apply w-full whitespace-nowrap overflow-hidden text-ellipsis cursor-pointer p-2;
 	}
 	.pad-right {
-		@apply fixed top-0 right-0 w-12 bg-black h-full;
+		@apply fixed top-0 right-0 w-12 bg-black h-full md:hidden;
 	}
 	.logout {
 		@apply fixed bottom-0 left-0 p-6 bg-zinc-900 text-white;

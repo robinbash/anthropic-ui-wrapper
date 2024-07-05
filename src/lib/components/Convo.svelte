@@ -5,6 +5,7 @@
 	import SvelteMarkdown from 'svelte-markdown';
 	import { authFetch } from '$lib/fetch';
 	import { user } from '$lib/stores';
+	import CodeRenderer from './CodeRenderer.svelte';
 
 	export let convoId: string | undefined = undefined;
 
@@ -72,7 +73,9 @@
 					<span class="user-inner">{message.content}</span>
 				</div>
 			{:else}
-				<div class="assistant-message"><SvelteMarkdown source={message.content} /></div>
+				<div class="assistant-message">
+					<SvelteMarkdown source={message.content} renderers={{ code: CodeRenderer }} />
+				</div>
 			{/if}
 		{/each}
 	</div>
@@ -111,5 +114,8 @@
 	}
 	button {
 		@apply rounded-full bg-zinc-700 text-white w-12 h-10 font-bold;
+	}
+	:global(.assistant-message > *) {
+		all: revert;
 	}
 </style>
