@@ -106,7 +106,7 @@
 		@apply w-full flex flex-col;
 	}
 	.messages {
-		@apply flex flex-col p-8 md:p-12 h-full overflow-y-scroll gap-8;
+		@apply flex flex-col p-6 md:p-12 h-full overflow-y-scroll gap-8;
 	}
 	.user-message {
 		@apply w-full flex justify-end;

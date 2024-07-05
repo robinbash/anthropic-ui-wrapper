@@ -33,6 +33,7 @@
 		background-color: black;
 		margin: 0;
 		color: white;
+		overscroll-behavior: none;
 		font-family: Lato, Geneva, Tahoma, sans-serif;
 	}
 	:global(.firebase-emulator-warning) {

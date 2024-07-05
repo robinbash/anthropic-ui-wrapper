@@ -2,6 +2,8 @@
 	import { convos, user } from '$lib/stores';
 	import { Logout } from '$lib/components';
 	import { onMount, onDestroy } from 'svelte';
+	import { swipe } from 'svelte-gestures';
+
 	let isOpen = false;
 
 	function toggleSidebar() {
@@ -20,9 +22,22 @@
 	onDestroy(() => {
 		convos.destroy();
 	});
+
+	//@ts-ignore
+	const handleSwipe = (event) => {
+		if (event.detail.direction === 'right') {
+			isOpen = true;
+		} else {
+			isOpen = false;
+		}
+	};
 </script>
 
-<div class="container">
+<div
+	class="container"
+	use:swipe={{ timeframe: 400, minSwipeDistance: 70, touchAction: 'pan-y' }}
+	on:swipe={handleSwipe}
+>
 	<button
 		class="burger"
 		class:left-4={!isOpen}
