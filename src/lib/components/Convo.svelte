@@ -8,7 +8,6 @@
 
 	export let convoId: string | undefined = undefined;
 
-	// let messages = [];
 	let inputEl: HTMLDivElement;
 	let generating = false;
 	let eventSource: EventSource;
@@ -87,55 +86,30 @@
 
 <style>
 	.convo {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
+		@apply w-full flex flex-col;
 	}
 	.messages {
-		padding: 3rem;
-		height: 100%;
-		overflow-y: scroll;
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
+		@apply flex flex-col p-8 md:p-12 h-full overflow-y-scroll gap-8;
 	}
 	.user-message {
-		width: 100%;
-		display: flex;
-		justify-content: right;
+		@apply w-full flex justify-end;
 	}
 	.user-inner {
-		border-radius: 1rem;
-		background-color: gray;
-		width: 70%;
-		text-align: justify;
-		padding: 0.5rem 1rem;
+		@apply rounded-full bg-zinc-700 py-2 px-4 text-justify w-5/6 md:w-2/3;
 	}
 	.assistant-message {
-		text-align: justify;
+		@apply text-justify;
 	}
 	.bottom {
-		display: flex;
-		justify-content: center;
-		align-items: end;
-		padding: 1rem 0 3rem;
-		gap: 0.5rem;
+		@apply flex justify-center items-end gap-2 pb-12 pt-4 px-8;
 	}
 	.input {
-		width: 25rem;
-		/* height: 1rem; */
-		border-radius: 1rem;
-		background-color: gray;
-		padding: 0.5rem 1rem;
+		@apply w-full rounded-full bg-zinc-700 py-2 px-4 max-w-96;
 	}
 	.input:focus {
-		outline: none;
+		@apply outline-none;
 	}
 	button {
-		width: 3rem;
-		height: 2.5rem;
-		border-radius: 1rem;
-		font-weight: bold;
-		background-color: gray;
+		@apply rounded-full bg-zinc-700 text-white w-12 h-10 font-bold;
 	}
 </style>

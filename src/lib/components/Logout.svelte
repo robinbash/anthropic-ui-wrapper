@@ -2,4 +2,4 @@
 	import { logout } from '$lib/auth';
 </script>
 
-<button on:click={logout}>Logout</button>
+<button on:click={logout}>{'> Log out'}</button>

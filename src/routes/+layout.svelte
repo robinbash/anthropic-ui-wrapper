@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '../app.css';
 	import { onMount } from 'svelte';
 	import { Sidebar, Login } from '$lib/components';
 	import { auth } from '$lib/firebase';
@@ -21,10 +22,9 @@
 	{:else if $user === null}
 		<Login />
 	{:else}
-		<Sidebar />
-		<main>
+		<Sidebar>
 			<slot />
-		</main>
+		</Sidebar>
 	{/if}
 </div>
 
@@ -35,15 +35,14 @@
 		color: white;
 		font-family: Lato, Geneva, Tahoma, sans-serif;
 	}
+	:global(.firebase-emulator-warning) {
+		display: none;
+	}
 	.app {
 		display: flex;
 		flex-direction: row;
 		height: 100vh;
 		width: 100vw;
-	}
-	main {
-		width: 100%;
-		display: flex;
 	}
 	.loading-screen {
 		width: 100vw;
