@@ -5,6 +5,7 @@ node_modules
 .vercel
 /.svelte-kit
 /build
+/.vite
 
 # OS
 .DS_Store
@@ -15,6 +16,7 @@ Thumbs.db
 .env.*
 !.env.example
 !.env.test
+/.vscode
 
 # Vite
 vite.config.js.timestamp-*
