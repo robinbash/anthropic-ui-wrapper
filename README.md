@@ -1,6 +1,7 @@
 # anthropic-ui-wrapper
 
-Small Chat-GPT like ui clone to drop and use LLM APIs with
+Small Chat-GPT like ui clone to drop and use LLM APIs with.
+Uses firebase for firestore and auth. App can be install on mobile as a PWA.
 
 ## Setup
 
