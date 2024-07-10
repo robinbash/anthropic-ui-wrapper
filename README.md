@@ -1,38 +1,33 @@
-# create-svelte
+# anthropic-ui-wrapper
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Small Chat-GPT like ui clone to drop and use LLM APIs with
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+## Setup
 
 ```bash
 # create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+npm npm install -g firebase-tools
+npm install
 ```
 
-## Developing
+## Local Dev
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+create .env with values from firebase project.
+create service account in firebase project settings and paste json to FIREBASE_SERVICE_ACCOUNT env var.
 
 ```bash
+npm run emulators
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+## Deploy
 
-To create a production version of your app:
+Test prodution build
 
 ```bash
 npm run build
+npm run preview
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Vercel:
+Link your forked repo on your Vercel account and set variables from .env
