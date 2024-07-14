@@ -62,11 +62,9 @@
 	</button>
 
 	<aside class="items" class:items-closed={!isOpen}>
-		<nav class="p-6">
+		<a class="add" on:click={close} href="/">+ Add</a>
+		<nav class="nav">
 			<ul class="space-y-2">
-				<li class="flex">
-					<a class="w-full" on:click={close} href="/">+ Add</a>
-				</li>
 				{#each $convos as conversation}
 					<li class="flex">
 						<a class="convo-item" on:click={close} href={`${conversation.id}`}
@@ -106,7 +104,13 @@
 	.pad-right {
 		@apply fixed top-0 right-0 w-12 bg-black h-full md:hidden;
 	}
+	.nav {
+		@apply h-full pl-6 pr-12 md:pr-6 py-14 overflow-y-scroll;
+	}
 	.logout {
-		@apply fixed bottom-0 left-0 p-6 bg-zinc-900 text-white;
+		@apply fixed w-full bottom-0 left-0 pb-6 px-6 pt-3 bg-zinc-900 text-white;
+	}
+	.add {
+		@apply fixed w-full top-0 left-0 pb-6 px-6 pt-3 bg-zinc-900 text-white;
 	}
 </style>
