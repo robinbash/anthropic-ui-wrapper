@@ -1,6 +1,15 @@
 import { writable } from 'svelte/store';
 import type { Conversation } from '$lib/types';
-import { collection, onSnapshot, addDoc, updateDoc, doc, query, where } from 'firebase/firestore';
+import {
+	collection,
+	onSnapshot,
+	addDoc,
+	updateDoc,
+	doc,
+	query,
+	where,
+	serverTimestamp
+} from 'firebase/firestore';
 import { db } from '$lib/firebase';
 import { goto } from '$app/navigation';
 
@@ -15,7 +24,8 @@ function createConvoStore() {
 		if (!conversation.id) {
 			const { id } = await addDoc(collection(db, CONVO_COLLECTION), {
 				messages: conversation.messages,
-				userId: conversation.userId
+				userId: conversation.userId,
+				created: serverTimestamp()
 			});
 			goto(id);
 			return;
@@ -30,11 +40,15 @@ function createConvoStore() {
 			const colRef = collection(db, CONVO_COLLECTION);
 			const q = query(colRef, where('userId', '==', userId));
 			unsubscribe = onSnapshot(q, (snapshot) => {
-				const data = snapshot.docs.map((doc) => ({
-					id: doc.id,
-					...doc.data()
-				}));
-				set(data as Conversation[]);
+				const data = (
+					snapshot.docs.map((doc) => ({
+						id: doc.id,
+						...doc.data()
+					})) as Conversation[]
+				).sort((a, b) => {
+					return (a.created?.seconds ?? 0) < (b.created?.seconds ?? 0) ? 1 : -1;
+				});
+				set(data);
 			});
 		},
 		destroy: () => {

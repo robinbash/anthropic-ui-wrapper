@@ -1,3 +1,5 @@
+import type { Timestamp } from 'firebase/firestore';
+
 export type ConversationRole = 'user' | 'assistant';
 
 export type Message = {
@@ -8,5 +10,6 @@ export type Message = {
 export type Conversation = {
 	id?: string;
 	userId?: string;
+	created?: Timestamp;
 	messages: Message[];
 };
