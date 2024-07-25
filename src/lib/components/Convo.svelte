@@ -30,6 +30,13 @@
 		}, 0);
 	};
 
+	const handleInputShortcuts = (event: KeyboardEvent) => {
+		if (event.key === 'Enter' && event.ctrlKey) {
+			event.preventDefault();
+			submitMessage();
+		}
+	};
+
 	async function submitMessage() {
 		const message = inputEl.innerText;
 		if (!message || generating || !$user) return;
@@ -94,7 +101,15 @@
 		{/each}
 	</div>
 	<div class="bottom">
-		<div class="input" contentEditable bind:this={inputEl} />
+		<div
+			class="input"
+			contentEditable
+			bind:this={inputEl}
+			on:keydown={handleInputShortcuts}
+			aria-multiline="true"
+			role="textbox"
+			tabindex="0"
+		/>
 		<div>
 			<button on:click={submitMessage}>{'>'}</button>
 		</div>

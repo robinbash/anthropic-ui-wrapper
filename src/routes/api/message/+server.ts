@@ -28,7 +28,7 @@ export const POST: RequestHandler = async ({ request }) => {
 					.stream({
 						messages: data.messages,
 						model: 'claude-3-5-sonnet-20240620',
-						max_tokens: 2048
+						max_tokens: 3000
 					})
 					.on('text', (text) => {
 						controller.enqueue(text);
